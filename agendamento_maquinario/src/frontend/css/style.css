@@ -1,0 +1,98 @@
+*{
+margin: 0;
+padding: 0px;
+box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+
+.corpologin {
+background-image: url(../../imgs/bglogin.png)
+}
+
+
+
+.styleform {
+background-color: #E6EDF0;          
+max-width: 500px;
+width: 500px; 
+padding: 2rem;
+display: flex;
+flex-direction: column;
+align-items: center;
+display: flex;
+}
+
+.entrarlogostyle {
+text-align: center;
+}
+
+.botaologin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 70px;
+    background-color: #2589A8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 150px;
+    height:50px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer; 
+}
+
+.botaologin:hover {
+    background-color: #3bb3d8;
+    transition-duration: 0.3s;
+}
+
+
+.naotemconta {
+padding-top: 70px;
+}
+
+
+.campo-texto {
+width: 300px;        
+height: 45px;        
+padding: 0 15px;     
+border-radius: 8px;  
+border: 1px solid black;    
+font-size: 13px;     
+}
+
+.formulariologin {
+    padding-top: 50px;
+}
+
+.linkcadastro {
+    text-decoration: none;
+    color: #2589A8;
+}
+
+.container {
+  display: flex;
+  align-items: center; 
+}
+.container-texto {
+    margin-left: auto;
+    margin-top: auto;
+    padding: 4rem;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.suaobra {
+    color: white;
+}
+
+.semparadas {
+    color: #F5B800;
+}
+
