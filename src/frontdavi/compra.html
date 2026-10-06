@@ -46,7 +46,7 @@
 
         .explore-section {
 
-            height: 900vh;
+            height: 100vh;
 
             position: relative;
 
@@ -178,22 +178,47 @@
         }
 
 
-        .tractor-image:nth-child(2) {
 
-            width: 55%;
 
-            left: 22.5%;
+        .background-glow {
+
+            animation: glowAnimation 4s ease-in-out infinite;
 
         }
 
 
-        .tractor-image:nth-child(3) {
+        @keyframes glowAnimation {
 
-            width: 45%;
+            0%, 100% {
+                transform: scale(0.9);
+                opacity: 0.65;
+            }
 
-            left: 27.5%;
+            50% {
+                transform: scale(1.08);
+                opacity: 1;
+            }
 
-            top: 25%;
+        }
+
+
+        .qr-code {
+
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+            padding: 8px;
+            background: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        }
+
+
+        .qr-code:hover {
+
+            transform: scale(1.12);
+            box-shadow: 0 0 30px rgba(247, 187, 8, 0.75);
 
         }
 
@@ -416,9 +441,11 @@
 
         .final-section h2 {
 
-            font-size: clamp(50px, 8vw, 110px);
+            font-size: clamp(38px, 5vw, 70px);
 
             line-height: 0.9;
+
+            transform: translateY(-25px);
 
         }
 
@@ -487,6 +514,10 @@
 <body>
 
 
+    <!-- =====================================================
+         SEÇÃO DO EXPLODED VIEW
+    ====================================================== -->
+
     <section class="explore-section">
 
 
@@ -495,14 +526,27 @@
         <div class="scene">
 
 
-         
+            <!-- LUZ DE FUNDO -->
 
             <div class="background-glow"></div>
 
 
+            <!-- =================================================
+                 TRATOR
+            ================================================== -->
 
             <div id="tractor-container">
 
+                <!--
+
+                    COLOQUE A IMAGEM DO TRATOR
+                    NA MESMA PASTA DESTE HTML
+
+                    COM O NOME:
+
+                    trator.png
+
+                -->
 
                 <img
                     src="/src/imgs/Designer(2).png"
@@ -511,32 +555,17 @@
                     alt="Trator CAT 416"
                 >
 
-                <img
-                    src="/src/imgs/Designer(1).png"
-                    class="tractor-image"
-                    alt="Trator CAT 416"
-                >
-
-                <img
-                    src="/src/imgs/Designer(4).png"
-                    class="tractor-image"
-                    alt="Trator CAT 416"
-                >
-
-                <img
-                    src="/src/imgs/Designer.png"
-                    class="tractor-image"
-                    alt="Trator CAT 416"
-                >
-
             </div>
 
 
-            
+            <!-- =================================================
+                 INFORMAÇÕES
+            ================================================== -->
+
             <div class="info info-left">
 
 
-        
+                <!-- INÍCIO -->
 
                 <div
                     id="home"
@@ -555,85 +584,6 @@
                     <p>
                         Role para explorar os principais
                         componentes da máquina.
-                    </p>
-
-                </div>
-
-
-                <!-- MOTOR -->
-
-                <div
-                    id="engine"
-                    class="info-content"
-                >
-
-                    <div class="tag">
-                        02 — MOTOR
-                    </div>
-
-                    <h2>
-                        O coração<br>
-                        da máquina.
-                    </h2>
-
-                    <p>
-                        Potência e eficiência trabalhando
-                        juntas para enfrentar operações pesadas,
-                        Utiliza o motor Cat C4.4 Turbo (mecânico ou pós-arrefecido),
-                         que entrega cerca de 96 hp de potência bruta (71 kW) ou 87 hp de potência líquida a 2.200 rpm
-                    </p>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="info info-right">
-
-
-                
-
-                <div
-                    id="wheel"
-                    class="info-content"
-                >
-
-                    <div class="tag">
-                        01 — RODAS
-                    </div>
-
-                    <h2>
-                        Tração para<br>
-                        qualquer terreno.
-                    </h2>
-
-                    <p>
-                        Estabilidade e desempenho para
-                        enfrentar diferentes tipos de terreno.
-                    </p>
-
-                </div>
-
-
-               
-
-                <div
-                    id="hydraulic"
-                    class="info-content"
-                >
-
-                    <div class="tag">
-                        03 — HIDRÁULICA
-                    </div>
-
-                    <h2>
-                        Força onde<br>
-                        você precisa.
-                    </h2>
-
-                    <p>
-                      Vai carregar, levantar e escavar com força e precisão. A hidráulica da CAT 416 garante desempenho confiável em qualquer operação.
                     </p>
 
                 </div>
@@ -664,41 +614,19 @@
 
         <div class="container">
 
-            <div class="tag">
-                CAT 416
-            </div>
-<br><br><br>
             <h2>
-                Pronto para<br>
-                o próximo trabalho!
+                ESCANEIE PARA PAGAR
             </h2>
 
             <img
-                src="/src/imgs/Designer(2).png"
-                alt="Trator CAT 416"
-                class="img-fluid mt-4 mb-3"
-                style="max-width: 600px; width: 80%;"
+                src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=NerisMachines-CAT416"
+                alt="QR Code para pagamento da CAT 416"
+                class="qr-code"
             >
 
-            <div class="mt-2">
-                <div class="tag">
-                    CAT 416
-                </div>
-
-                <h1 class="display-3 fw-bold mb-4">
-                    R$ 470.000,00
-                </h1>
-
-                <a href="compra.html" class="btn btn-warning btn-lg fw-bold px-5 py-3">
-                   ALUGAR AGORA
-                </a>
-            </div>
-<br><br>
         </div>
 
     </section>
-
-
 
 
     <script>
@@ -707,286 +635,12 @@
             document.getElementById("tractor-container");
 
 
-        const home =
-            document.getElementById("home");
-
-        const wheel =
-            document.getElementById("wheel");
-
-        const engine =
-            document.getElementById("engine");
-
-        const hydraulic =
-            document.getElementById("hydraulic");
-
-
-        const tractorImages =
-            document.querySelectorAll(".tractor-image");
-
-
-
-
-        function clamp(value, min, max) {
-
-            return Math.min(
-                Math.max(value, min),
-                max
-            );
-
-        }
-
-
-        function lerp(start, end, progress) {
-
-            return start +
-                (end - start) * progress;
-
-        }
-
-
-      
-
         function updateAnimation() {
 
-
-            const section =
-                document.querySelector(".explore-section");
-
-
-            const sectionTop =
-                section.offsetTop;
-
-
-            const sectionHeight =
-                section.offsetHeight;
-
-
-            const scroll =
-                window.scrollY;
-
-
-            let progress =
-                (scroll - sectionTop) /
-                (sectionHeight - window.innerHeight);
-
-
-            progress =
-                clamp(progress, 0, 1);
-
-
-            let scale = 1;
-
-            let x = 0;
-
-            let y = 0;
-
-
-
-            if (progress < 0.25) {
-
-
-                const p =
-                    progress / 0.25;
-
-
-                scale =
-                    lerp(
-                        1,
-                        1.15,
-                        p
-                    );
-
-
-                x =
-                    lerp(
-                        0,
-                        30,
-                        p
-                    );
-
-
-                y =
-                    lerp(
-                        0,
-                        10,
-                        p
-                    );
-
-
-            }
-
-
-    
-
-            else if (progress < 0.50) {
-
-
-                const p =
-                    (progress - 0.25) / 0.25;
-
-
-                scale =
-                    lerp(
-                        1.15,
-                        2.1,
-                        p
-                    );
-
-
-                x =
-                    lerp(
-                        30,
-                        -180,
-                        p
-                    );
-
-
-                y =
-                    lerp(
-                        10,
-                        80,
-                        p
-                    );
-
-
-            }
-
-
-            else if (progress < 0.75) {
-
-
-                const p =
-                    (progress - 0.50) / 0.25;
-
-
-                scale =
-                    lerp(
-                        2.1,
-                        2.2,
-                        p
-                    );
-
-                x =
-                    lerp(
-                        -180,
-                        150,
-                        p
-                    );
-
-
-                y =
-                    lerp(
-                        80,
-                        -60,
-                        p
-                    );
-
-
-            }
-
-
-          
-
-            else {
-
-
-                const p =
-                    (progress - 0.75) / 0.25;
-
-
-                scale =
-                    lerp(
-                        2.2,
-                        2.0,
-                        p
-                    );
-
-
-                x =
-                    lerp(
-                        150,
-                        260,
-                        p
-                    );
-
-
-                y =
-                    lerp(
-                        -60,
-                        40,
-                        p
-                    );
-
-
-            }
-
-
-           
-
             tractorContainer.style.transform =
-
-                `translate(-50%, -50%)
-                 translate(${x}px, ${y}px)
-                 scale(${scale})`;
-
-
-            tractorImages.forEach((image, index) => {
-
-                image.classList.toggle(
-                    "active",
-                    index === Math.min(
-                        Math.floor(progress * 4),
-                        tractorImages.length - 1
-                    )
-                );
-
-            });
-
-
-
-
-            home.classList.remove("active");
-
-            wheel.classList.remove("active");
-
-            engine.classList.remove("active");
-
-            hydraulic.classList.remove("active");
-
-
-            if (progress < 0.20) {
-
-                home.classList.add("active");
-
-            }
-
-            else if (progress < 0.50) {
-
-                wheel.classList.add("active");
-
-            }
-
-            else if (progress < 0.75) {
-
-                engine.classList.add("active");
-
-            }
-
-            else {
-
-                hydraulic.classList.add("active");
-
-            }
+                `translate(-50%, -50%) scale(1)`;
 
         }
-
-
-
-
-        window.addEventListener(
-            "scroll",
-            updateAnimation
-        );
 
 
         window.addEventListener(
@@ -994,8 +648,6 @@
             updateAnimation
         );
 
-
-        
 
         updateAnimation();
 
