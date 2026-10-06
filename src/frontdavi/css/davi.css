@@ -126,3 +126,48 @@ body{
     object-fit: cover; 
     border-radius: 4% !important;
 }
+/* Configuração para as seções de texto ocuparem bastante espaço vertical */
+.secao-detalhe {
+    min-height: 80vh; /* Faz cada bloco de texto ser grande, obrigando o usuário a rolar a página */
+    margin-bottom: 10vh;
+}
+
+/* Garante que o container do trator ocupe a altura da tela no PC */
+.style-container-trator {
+    height: 100vh;
+}
+
+/* O wrapper impede que a imagem saia para fora da caixinha dela de forma feia */
+.wrapper-trator {
+    width: 100%;
+    max-width: 550px;
+    overflow: hidden;
+}
+
+/* A imagem começa no tamanho normal */
+#trator-animado {
+    width: 100%;
+    height: auto;
+    /* A mágica do tempo: suaviza a mudança de zoom e posição em 0.6 segundos */
+    transition: transform 0.6s ease-out; 
+    transform-origin: center center; /* O zoom vai se basear no centro da foto */
+}
+
+/* ==========================================================================
+   AS CLASSES DE ZOOM (Que vamos ativar via JavaScript de acordo com o scroll)
+   ========================================================================== */
+
+/* 1. Zoom focado na Caçamba Frontal (Aumenta e joga a imagem um pouco para a direita/baixo) */
+.zoom-cacamba {
+    transform: scale(2.0) translate(100px, 50px);
+}
+
+/* 2. Zoom focado na Cabine (Aumenta bastante e centraliza na janela do motorista) */
+.zoom-cabine {
+    transform: scale(2.5) translate(-60px, -20px);
+}
+
+/* 3. Zoom focado no Braço Traseiro (Aumenta e joga a imagem para a esquerda para mostrar a traseira) */
+.zoom-braco {
+    transform: scale(2.2) translate(-120px, 40px);
+}

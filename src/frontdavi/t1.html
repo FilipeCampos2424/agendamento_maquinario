@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CAT 416 — Explore</title>
+
+    <!-- Bootstrap 5.3 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           CONFIGURAÇÕES GERAIS
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: #0b111e;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        /* =====================================================
+           ÁREA PRINCIPAL DA ANIMAÇÃO
+
+           Quanto maior esse valor,
+           mais tempo o usuário terá para fazer o scroll.
+        ===================================================== */
+
+        .explore-section {
+
+            height: 500vh;
+
+            position: relative;
+
+        }
+
+
+        
+
+        .scene {
+
+            position: sticky;
+
+            top: 0;
+
+            width: 100%;
+
+            height: 100vh;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        /* =====================================================
+           FUNDO DECORATIVO
+        ===================================================== */
+
+        .background-glow {
+
+            position: absolute;
+
+            width: 700px;
+
+            height: 700px;
+
+            border-radius: 50%;
+
+            background: radial-gradient(
+                circle,
+                rgba(247, 187, 8, 0.986),
+                transparent 70%
+            );
+
+            pointer-events: none;
+
+        }
+
+
+        /* =====================================================
+           TRATOR
+        ===================================================== */
+
+        #tractor-container {
+
+            position: absolute;
+
+            width: min(900px, 75vw);
+
+            left: 50%;
+
+            top: 50%;
+
+            transform:
+                translate(-50%, -50%)
+                scale(1);
+
+            will-change: transform;
+
+        }
+
+
+        #tractor {
+
+            width: 100%;
+
+            height: auto;
+
+            display: block;
+
+            /*
+                A imagem original tem fundo branco.
+
+                Por enquanto vamos usar ela normalmente.
+            */
+
+        }
+
+
+        .tractor-image {
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: auto;
+
+            display: block;
+
+            opacity: 0;
+
+            transition: opacity 0.5s ease;
+
+            pointer-events: none;
+
+        }
+
+
+        .tractor-image:first-child {
+
+            position: relative;
+
+        }
+
+
+        .tractor-image.active {
+
+            opacity: 1;
+
+        }
+
+
+        .tractor-image:nth-child(2) {
+
+            width: 55%;
+
+            left: 22.5%;
+
+        }
+
+
+        .tractor-image:nth-child(3) {
+
+            width: 45%;
+
+            left: 27.5%;
+
+            top: 25%;
+
+        }
+
+
+        /* =====================================================
+           TEXTOS
+        ===================================================== */
+
+        .info {
+
+            position: absolute;
+
+            width: 350px;
+
+            z-index: 10;
+
+            pointer-events: none;
+
+        }
+
+
+        .info-left {
+
+            left: 7%;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+        }
+
+
+        .info-right {
+
+            right: 7%;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+        }
+
+
+        .info-content {
+
+            position: absolute;
+
+            width: 350px;
+
+            opacity: 0;
+
+            transform: translateY(30px);
+
+            transition:
+                opacity 0.5s ease,
+                transform 0.6s ease;
+
+        }
+
+
+        .info-content.active {
+
+            opacity: 1;
+
+            transform: translateY(0);
+
+        }
+
+
+        .tag {
+
+            font-size: 12px;
+
+            letter-spacing: 4px;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+
+            opacity: 0.7;
+
+        }
+
+
+        .info h1 {
+
+            font-size: clamp(45px, 5vw, 75px);
+
+            line-height: 0.95;
+
+            font-weight: 700;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .info h2 {
+
+            font-size: clamp(40px, 4vw, 60px);
+
+            line-height: 0.95;
+
+            font-weight: 700;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .info p {
+
+            color: #aab3c2;
+
+            line-height: 1.7;
+
+            font-size: 16px;
+
+        }
+
+
+        /* =====================================================
+           INDICADOR DE SCROLL
+        ===================================================== */
+
+        .scroll-indicator {
+
+            position: absolute;
+
+            bottom: 35px;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            gap: 10px;
+
+            opacity: 0.6;
+
+            z-index: 20;
+
+        }
+
+
+        .scroll-indicator span {
+
+            font-size: 10px;
+
+            letter-spacing: 4px;
+
+        }
+
+
+        .scroll-line {
+
+            width: 1px;
+
+            height: 50px;
+
+            background: white;
+
+            animation: scrollAnimation 1.5s infinite;
+
+        }
+
+
+        @keyframes scrollAnimation {
+
+            0% {
+
+                transform: scaleY(0);
+
+                transform-origin: top;
+
+            }
+
+            50% {
+
+                transform: scaleY(1);
+
+                transform-origin: top;
+
+            }
+
+            100% {
+
+                transform: scaleY(0);
+
+                transform-origin: bottom;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           SEÇÃO FINAL
+        ===================================================== */
+
+        .final-section {
+
+            height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+        }
+
+
+        .final-section h2 {
+
+            font-size: clamp(50px, 8vw, 110px);
+
+            line-height: 0.9;
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 768px) {
+
+            #tractor-container {
+
+                width: 120vw;
+
+            }
+
+
+            .info {
+
+                width: 260px;
+
+            }
+
+
+            .info-left {
+
+                left: 20px;
+
+            }
+
+
+            .info-right {
+
+                right: 20px;
+
+            }
+
+
+            .info-content {
+
+                width: 260px;
+
+            }
+
+
+            .info h1 {
+
+                font-size: 42px;
+
+            }
+
+
+            .info h2 {
+
+                font-size: 38px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <section class="explore-section">
+
+
+        <!-- CENA FIXA -->
+
+        <div class="scene">
+
+
+         
+
+            <div class="background-glow"></div>
+
+
+
+            <div id="tractor-container">
+
+
+                <img
+                    src="/src/imgs/Designer(2).png"
+                    id="tractor"
+                    class="tractor-image active"
+                    alt="Trator CAT 416"
+                >
+
+                <img
+                    src="/src/imgs/Designer(1).png"
+                    class="tractor-image"
+                    alt="Trator CAT 416"
+                >
+
+                <img
+                    src="/src/imgs/Designer(4).png"
+                    class="tractor-image"
+                    alt="Trator CAT 416"
+                >
+
+                <img
+                    src="/src/imgs/Designer.png"
+                    class="tractor-image"
+                    alt="Trator CAT 416"
+                >
+
+            </div>
+
+
+            
+            <div class="info info-left">
+
+
+        
+
+                <div
+                    id="home"
+                    class="info-content active"
+                >
+
+                    <div class="tag">
+                        CAT 416
+                    </div>
+
+                    <h1>
+                        Feita para<br>
+                        trabalho pesado.
+                    </h1>
+
+                    <p>
+                        Role para explorar os principais
+                        componentes da máquina.
+                    </p>
+
+                </div>
+
+
+                <!-- MOTOR -->
+
+                <div
+                    id="engine"
+                    class="info-content"
+                >
+
+                    <div class="tag">
+                        02 — MOTOR
+                    </div>
+
+                    <h2>
+                        O coração<br>
+                        da máquina.
+                    </h2>
+
+                    <p>
+                        Potência e eficiência trabalhando
+                        juntas para enfrentar operações pesadas,
+                        Utiliza o motor Cat C4.4 Turbo (mecânico ou pós-arrefecido),
+                         que entrega cerca de 96 hp de potência bruta (71 kW) ou 87 hp de potência líquida a 2.200 rpm
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="info info-right">
+
+
+                
+
+                <div
+                    id="wheel"
+                    class="info-content"
+                >
+
+                    <div class="tag">
+                        01 — RODAS
+                    </div>
+
+                    <h2>
+                        Tração para<br>
+                        qualquer terreno.
+                    </h2>
+
+                    <p>
+                        Estabilidade e desempenho para
+                        enfrentar diferentes tipos de terreno.
+                    </p>
+
+                </div>
+
+
+               
+
+                <div
+                    id="hydraulic"
+                    class="info-content"
+                >
+
+                    <div class="tag">
+                        03 — HIDRÁULICA
+                    </div>
+
+                    <h2>
+                        Força onde<br>
+                        você precisa.
+                    </h2>
+
+                    <p>
+                      Vai carregar, levantar e escavar com força e precisão. A hidráulica da CAT 416 garante desempenho confiável em qualquer operação.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="scroll-indicator">
+
+                <span>
+                    SCROLL
+                </span>
+
+                <div class="scroll-line"></div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <section class="final-section">
+
+        <div class="container">
+
+            <div class="tag">
+                CAT 416
+            </div>
+<br><br><br>
+            <h2>
+                Pronto para<br>
+                o próximo trabalho!
+            </h2>
+
+            <img
+                src="/src/imgs/Designer(2).png"
+                alt="Trator CAT 416"
+                class="img-fluid mt-4 mb-3"
+                style="max-width: 600px; width: 80%;"
+            >
+
+            <div class="mt-2">
+                <div class="tag">
+                    CAT 416
+                </div>
+
+                <h1 class="display-3 fw-bold mb-4">
+                    R$ 470.000,00
+                </h1>
+
+                <a href="compra.html" class="btn btn-warning btn-lg fw-bold px-5 py-3">
+                   ALUGAR AGORA
+                </a>
+            </div>
+<br><br>
+        </div>
+
+    </section>
+
+
+
+
+    <script>
+
+        const tractorContainer =
+            document.getElementById("tractor-container");
+
+
+        const home =
+            document.getElementById("home");
+
+        const wheel =
+            document.getElementById("wheel");
+
+        const engine =
+            document.getElementById("engine");
+
+        const hydraulic =
+            document.getElementById("hydraulic");
+
+
+        const tractorImages =
+            document.querySelectorAll(".tractor-image");
+
+
+
+
+        function clamp(value, min, max) {
+
+            return Math.min(
+                Math.max(value, min),
+                max
+            );
+
+        }
+
+
+        function lerp(start, end, progress) {
+
+            return start +
+                (end - start) * progress;
+
+        }
+
+
+      
+
+        function updateAnimation() {
+
+
+            const section =
+                document.querySelector(".explore-section");
+
+
+            const sectionTop =
+                section.offsetTop;
+
+
+            const sectionHeight =
+                section.offsetHeight;
+
+
+            const scroll =
+                window.scrollY;
+
+
+            let progress =
+                (scroll - sectionTop) /
+                (sectionHeight - window.innerHeight);
+
+
+            progress =
+                clamp(progress, 0, 1);
+
+
+            let scale = 1;
+
+            let x = 0;
+
+            let y = 0;
+
+
+
+            if (progress < 0.25) {
+
+
+                const p =
+                    progress / 0.25;
+
+
+                scale =
+                    lerp(
+                        1,
+                        1.15,
+                        p
+                    );
+
+
+                x =
+                    lerp(
+                        0,
+                        30,
+                        p
+                    );
+
+
+                y =
+                    lerp(
+                        0,
+                        10,
+                        p
+                    );
+
+
+            }
+
+
+    
+
+            else if (progress < 0.50) {
+
+
+                const p =
+                    (progress - 0.25) / 0.25;
+
+
+                scale =
+                    lerp(
+                        1.15,
+                        2.1,
+                        p
+                    );
+
+
+                x =
+                    lerp(
+                        30,
+                        -180,
+                        p
+                    );
+
+
+                y =
+                    lerp(
+                        10,
+                        80,
+                        p
+                    );
+
+
+            }
+
+
+            else if (progress < 0.75) {
+
+
+                const p =
+                    (progress - 0.50) / 0.25;
+
+
+                scale =
+                    lerp(
+                        2.1,
+                        2.2,
+                        p
+                    );
+
+                x =
+                    lerp(
+                        -180,
+                        150,
+                        p
+                    );
+
+
+                y =
+                    lerp(
+                        80,
+                        -60,
+                        p
+                    );
+
+
+            }
+
+
+          
+
+            else {
+
+
+                const p =
+                    (progress - 0.75) / 0.25;
+
+
+                scale =
+                    lerp(
+                        2.2,
+                        2.0,
+                        p
+                    );
+
+
+                x =
+                    lerp(
+                        150,
+                        260,
+                        p
+                    );
+
+
+                y =
+                    lerp(
+                        -60,
+                        40,
+                        p
+                    );
+
+
+            }
+
+
+           
+
+            tractorContainer.style.transform =
+
+                `translate(-50%, -50%)
+                 translate(${x}px, ${y}px)
+                 scale(${scale})`;
+
+
+            tractorImages.forEach((image, index) => {
+
+                image.classList.toggle(
+                    "active",
+                    index === Math.min(
+                        Math.floor(progress * 4),
+                        tractorImages.length - 1
+                    )
+                );
+
+            });
+
+
+
+
+            home.classList.remove("active");
+
+            wheel.classList.remove("active");
+
+            engine.classList.remove("active");
+
+            hydraulic.classList.remove("active");
+
+
+            if (progress < 0.20) {
+
+                home.classList.add("active");
+
+            }
+
+            else if (progress < 0.50) {
+
+                wheel.classList.add("active");
+
+            }
+
+            else if (progress < 0.75) {
+
+                engine.classList.add("active");
+
+            }
+
+            else {
+
+                hydraulic.classList.add("active");
+
+            }
+
+        }
+
+
+
+
+        window.addEventListener(
+            "scroll",
+            updateAnimation
+        );
+
+
+        window.addEventListener(
+            "resize",
+            updateAnimation
+        );
+
+
+        
+
+        updateAnimation();
+
+    </script>
+
+
+</body>
+
+</html>
